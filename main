@@ -1,0 +1,65 @@
+#include <stdio.h>
+#include <string.h>
+#include <locale.h>
+#include <stdlib.h>
+
+#define TAM 50
+#define TAMFIL 2
+#define TAMFUNC 2
+
+struct funcionario{
+	char nome[TAM];
+	char cargo[TAM];
+	double dinheiro;
+};
+
+typedef struct funcionario funcionario;
+
+int main(){
+	setlocale(LC_ALL,"Portuguese_Brasil.1252");
+	char consulta[50];
+	int existe,	acha_filial,acha_funcionario;
+	
+	funcionario lista_funcionarios[TAMFIL][TAMFUNC];
+	for (int i=0;i<TAMFIL;i++){
+		printf("\nCADASTRO DE FUNCIONARIOS - FILIAL %d:\n",i+1);
+			
+		for (int j=0; j<TAMFUNC;j++){
+			printf("\nDIGITE O NOME: ");
+			scanf("%50[^\n]s",&lista_funcionarios[i][j].nome);
+			fflush(stdin);
+			
+			printf("DIGITE O CARGO: ");
+			scanf("%50[^\n]s",&lista_funcionarios[i][j].cargo);
+			fflush(stdin);
+			
+			printf("DIGITE O SALARIO: ");
+			scanf("%lf",&lista_funcionarios[i][j].dinheiro);
+			fflush(stdin);
+			
+		}
+	}
+system("cls");
+				
+		printf("Pesquisar funcionario por nome: ");
+		scanf("%s",consulta);
+		
+		
+		for (int i=0;i<TAMFIL;i++){
+			for (int j=0; j<TAMFUNC;j++){
+				if (strcmp(consulta,lista_funcionarios[i][j].nome)==0){
+					existe=1;
+					acha_filial=i;
+					acha_funcionario=j;
+				}
+			}
+		}
+		if (existe=1){
+			printf("\nDados do funcionario:\n");
+			printf("Filial: %d\n",acha_filial+1);
+			printf("Nome: %s\n",lista_funcionarios[acha_filial][acha_funcionario].nome);
+			printf("Cargo: %s\n",lista_funcionarios[acha_filial][acha_funcionario].cargo);
+			printf("Salario: R$ %.2lf\n",lista_funcionarios[acha_filial][acha_funcionario].dinheiro);
+
+		}
+}	
